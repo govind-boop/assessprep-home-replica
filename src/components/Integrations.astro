@@ -1,0 +1,90 @@
+---
+// Clockwise from the top, matching the live orbit.
+const logos = [
+  { src: '/images/int-moodle.png', alt: 'Moodle logo' },
+  { src: '/images/int-blackbaud.svg', alt: 'Blackbaud logo' },
+  { src: '/images/int-managebac.png', alt: 'Managebac logo' },
+  { src: '/images/int-microsoft.svg', alt: 'Microsoft logo' },
+  { src: '/images/int-canvas.svg', alt: 'Canvas logo' },
+  { src: '/images/int-google.svg', alt: 'Google logo' },
+  { src: '/images/int-atlas.png', alt: 'Atlas logo' },
+  { src: '/images/int-c-logo.svg', alt: 'Integration partner logo' },
+];
+const blobs = [
+  ['227,148,0', -35.5, -35.5], ['0,151,254', 35.5, -43.5], ['0,173,9', 41.5, 20], ['243,71,255', 31.5, 38.5],
+  ['153,102,255', -17.5, 20], ['255,71,71', -46.5, 41.5], ['71,114,255', -39.5, 5],
+] as const;
+---
+<section class="integ" id="integrations">
+  <div class="integ__head">
+    <div class="integ__bg" aria-hidden="true"></div>
+    <span class="badge">10+ Integrations</span>
+    <h2 class="h-xl integ__title">Integrated with the platforms you use</h2>
+    <p class="integ__sub">Connect your favorite tools effortlessly. Our platform plays well with others, creating a unified ecosystem for your school.</p>
+  </div>
+
+  <div class="orbit" aria-label="Integrations: Moodle, Blackbaud, ManageBac, Microsoft, Canvas, Google, Atlas and more">
+    <div class="orbit__rings" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="orbit__glow" aria-hidden="true">
+      {blobs.map(([rgb, x, y]) => <span style={`--x:${x}px;--y:${y}px;background:radial-gradient(50% 50% at 50% 50%, rgba(${rgb},.25) 0%, rgba(${rgb},0) 100%)`}></span>)}
+    </div>
+    <div class="orbit__center">
+      <div class="orbit__center-in"><img src="/images/logo-mark.svg" alt="AssessPrep logo" width="37" height="37" /></div>
+    </div>
+    <div class="orbit__track">
+      {logos.map((l, i) => (
+        <div class="orbit__slot" style={`--a:${i * 45}deg`}>
+          <div class="orbit__tile">
+            <img class="orbit__blur" src={l.src} alt="" />
+            <span class="orbit__veil"></span>
+            <img class="orbit__logo" src={l.src} alt={l.alt} />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .integ { position: relative; }
+  .integ__head { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 138px 20px 0; height: 316px; }
+  .integ__bg { position: absolute; left: 0; right: 0; top: 60px; height: 256px; background: radial-gradient(50% 100% at 50% 0%, #fafafa 0%, #fff 100%); z-index: -1; }
+  .integ__title { margin-top: 12px; }
+  .integ__sub { margin-top: 12px; max-width: 540px; font-family: var(--font-inter); font-size: 18px; line-height: 1.5; color: #616161; }
+
+  .orbit { position: relative; height: 474px; overflow: hidden; }
+  .orbit > * { position: absolute; left: 50%; top: 237px; }
+  .orbit__rings span { position: absolute; border-radius: 50%; transform: translate(-50%, -50%); }
+  .orbit__rings span:nth-child(1) { width: 250px; height: 250px; background: rgba(0,0,0,.02); box-shadow: rgba(0,0,0,.04) 0 0 10px inset; }
+  .orbit__rings span:nth-child(2) { width: 179px; height: 179px; background: rgba(0,0,0,.03); box-shadow: rgba(0,0,0,.08) 0 0 10px inset; }
+  .orbit__rings span:nth-child(3) { width: 107px; height: 107px; background: rgba(0,0,0,.04); box-shadow: rgba(0,0,0,.12) 0 0 10px inset; }
+  .orbit__glow span { position: absolute; width: 143px; height: 143px; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))); }
+  .orbit__glow { animation: spin 18s linear infinite; }
+  .orbit__center {
+    width: 80px; height: 80px; transform: translate(-50%, -50%); border-radius: 22.83px; background: rgba(255,255,255,.48);
+    box-shadow: rgba(0,0,0,.1) 0 .72px 3px, rgba(0,0,0,.09) 0 4.28px 6px, rgba(0,0,0,.05) 0 9.28px 8px, rgba(0,0,0,.01) 0 16.5px 10px;
+    display: grid; place-items: center;
+  }
+  .orbit__center-in { width: 71px; height: 71px; border-radius: 18.56px; background: #fff; display: grid; place-items: center; }
+  .orbit__center-in img { width: 37px; height: 37px; }
+
+  .orbit__track { width: 320px; height: 320px; margin: -160px 0 0 -160px; border-radius: 50%; border: 1px solid rgba(0,0,0,.07); animation: spin 80s linear infinite; }
+  .orbit__slot { position: absolute; left: 50%; top: 50%; transform: rotate(var(--a)) translateY(-160px) rotate(calc(-1 * var(--a))); }
+  .orbit__tile {
+    position: absolute; width: 43px; height: 43px; margin: -21.5px 0 0 -21.5px; border-radius: 11.4px; background: #fff; overflow: hidden;
+    box-shadow: rgba(0,0,0,.1) 0 .72px 3px, rgba(0,0,0,.09) 0 4.28px 6px, rgba(0,0,0,.05) 0 9.28px 8px;
+    animation: spin 80s linear infinite reverse;
+  }
+  .orbit__blur { position: absolute; left: 4.5px; top: 4.5px; width: 34px; height: 34px; filter: blur(6px); }
+  .orbit__veil { position: absolute; inset: 1.5px; border-radius: 10px; background: rgba(255,255,255,.7); }
+  .orbit__logo { position: absolute; left: 11px; top: 11px; width: 21px; height: 21px; object-fit: contain; }
+  @keyframes spin { to { rotate: 360deg; } }
+
+  @media (max-width: 809.98px) {
+    .integ__head { padding: 40px 15px 0; height: auto; }
+    .integ__bg { top: 0; height: 100%; }
+    .integ__title { font-size: 28px; max-width: 300px; margin-top: 18px; }
+    .integ__sub { margin-top: 12px; font-family: var(--font-body); font-size: 16px; line-height: 1.6; letter-spacing: .03em; color: #52525b; max-width: 330px; }
+    .orbit { height: 474px; margin-top: 37px; }
+  }
+</style>

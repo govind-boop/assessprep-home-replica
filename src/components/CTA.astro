@@ -1,0 +1,35 @@
+---
+import { BOOK_DEMO } from '../data/site';
+---
+<section class="cta">
+  <div class="cta__box">
+    <div class="cta__dots" aria-hidden="true"></div>
+    <h2 class="h-xl cta__title">Simplify your assessments today</h2>
+    <p class="lead cta__sub">Discover how AssessPrep makes it easy to create, deliver and grade assessments.</p>
+    <a class="btn-teal btn-teal--lg cta__btn" href={BOOK_DEMO}>Book a Demo</a>
+  </div>
+</section>
+
+<style>
+  .cta { padding: 15px 20px 31px; }
+  .cta__box {
+    position: relative; overflow: hidden; max-width: 1200px; height: 440px; margin: 0 auto; border-radius: 16px; background: #f6f6f6;
+    display: flex; flex-direction: column; align-items: center; text-align: center; padding: 110px 20px 0;
+  }
+  .cta__dots {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 252px;
+    background: url('/images/dot-pattern.svg') center / 41px auto repeat; opacity: .07;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+  }
+  .cta__title, .cta__sub, .cta__btn { position: relative; }
+  .cta__sub { margin-top: 20px; max-width: 560px; }
+  .cta__btn { margin-top: 30px; }
+  @media (max-width: 809.98px) {
+    .cta { padding: 60px 15px 30px; }
+    .cta__box { height: auto; padding: 70px 25px 70px; }
+    .cta__title { font-size: 23px; max-width: 280px; letter-spacing: -0.03em; }
+    .cta__sub { font-size: 16px; max-width: 280px; margin-top: 10px; letter-spacing: .03em; }
+    .cta__btn { margin-top: 24px; }
+  }
+</style>

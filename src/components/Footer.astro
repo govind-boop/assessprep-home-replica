@@ -1,0 +1,155 @@
+---
+import { url, PLANS, BOOK_DEMO, SITE } from '../data/site';
+type L = { t: string; href: string; isNew?: boolean };
+const cols: { h: string; links: L[] }[] = [
+  { h: 'Features', links: [
+    { t: 'Create', href: url('features/create-online-assessments') },
+    { t: 'Deliver', href: url('features/deliver') },
+    { t: 'Monitor', href: url('features/monitor') },
+    { t: 'Grade', href: url('features/grade-with-ai') },
+    { t: 'Analyse', href: url('features/deliver') },
+    { t: 'Paper mode', href: url('features/papermode'), isNew: true },
+    { t: 'Integrations', href: url('integration') },
+  ] },
+  { h: 'Solutions', links: [
+    { t: 'IB MYP', href: url('solutions/ib-myp') },
+    { t: 'IB DP', href: url('solutions/ib-dp') },
+    { t: 'IGCSE', href: url('solutions/igcse') },
+    { t: 'Districts', href: url('solutions/districts') },
+    { t: 'AP', href: url('solutions/ap') },
+    { t: 'Other curricula', href: url('solutions/other-curricula') },
+  ] },
+  { h: 'Resources', links: [
+    { t: 'Case studies', href: url('case-study') },
+    { t: 'Blogs', href: url('blogs') },
+    { t: 'Help center', href: 'https://assessprep.zendesk.com/hc/en-us' },
+    { t: 'Plans', href: url('blogs') /* the live footer links "Plans" to /blogs */ },
+  ] },
+  { h: 'Company', links: [
+    { t: 'About us', href: url('') },
+    { t: 'Careers', href: url('careers') },
+    { t: 'Contact us', href: BOOK_DEMO },
+  ] },
+];
+// Mobile footer uses its own (slightly different) link set on the live site.
+const mFeatures: L[] = [
+  { t: 'Create', href: url('features/create-online-assessments') }, { t: 'Deliver', href: url('features/deliver') },
+  { t: 'Monitor', href: url('features/monitor') }, { t: 'Grade', href: url('features/grade-with-ai') },
+  { t: 'Analyse', href: url('features/analyse') }, { t: 'AI Assistant', href: url('features/ai') },
+  { t: 'Paper Mode', href: url('features/papermode'), isNew: true }, { t: 'Integrations', href: url('integration') },
+];
+const mSolutions: L[] = [
+  { t: 'IB DP', href: url('solutions/ib-dp') }, { t: 'IB MYP', href: url('solutions/ib-myp') }, { t: 'IGCSE', href: url('solutions/igcse') },
+  { t: 'Districts', href: url('solutions/districts') }, { t: 'AP', href: url('solutions/ap') }, { t: 'Other Curricula', href: url('solutions/other-curricula') },
+];
+const mResources: L[] = [{ t: 'Plans', href: PLANS }, { t: 'Case Studies', href: url('case-study') }, { t: 'Help center', href: 'https://assessprep.zendesk.com/hc/en-us' }];
+const mCompany: L[] = [{ t: 'Career', href: url('careers') }, { t: 'About Us', href: url('') }, { t: 'Contact Us', href: BOOK_DEMO }];
+const legal = [
+  { t: 'Terms & Conditions', href: url('privacyterms/terms-conditions') },
+  { t: 'Privacy Policy', href: url('privacyterms/privacy-policy') },
+  { t: 'DPDPA', href: url('privacyterms/dpdpa') },
+  { t: 'AI Privacy', href: url('privacyterms/ai-privacy-and-security-policy') },
+];
+const socials = [
+  { href: 'https://x.com/assessprep', icon: 'x', label: 'AssessPrep on X' },
+  { href: 'https://linkedin.com/company/assessprep', icon: 'linkedin', label: 'AssessPrep on LinkedIn' },
+  { href: 'https://www.youtube.com/channel/UCvBa758hmGwkb5EWAvExcDg', icon: 'youtube', label: 'AssessPrep on YouTube' },
+];
+---
+<footer class="footer">
+  <!-- Desktop / tablet -->
+  <div class="fbox only-desktop">
+    <div class="fbox__top">
+      <div class="fbrand">
+        <a href={SITE + '/'}><img src="/images/logo-mark.svg" alt="AssessPrep Logo" width="45" height="47" /></a>
+        <a class="fbrand__name" href={SITE + '/'}>AssessPrep</a>
+        <p class="fbrand__tag">Next Generation Assessment Platform</p>
+        <div class="fsocial">
+          {socials.map((s) => <a href={s.href} aria-label={s.label} target="_blank" rel="noopener"><img src={`/icons/${s.icon}.svg`} alt="" width="30" height="30" /></a>)}
+        </div>
+      </div>
+      <div class="fcols">
+        {cols.map((c) => (
+          <div class="fcol">
+            <p class="fcol__h">{c.h}</p>
+            <ul>
+              {c.links.map((l) => <li><a href={l.href}>{l.t}</a>{l.isNew && <span class="fnew">New</span>}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+    <img class="fbox__wordmark" src="/images/footer-wordmark.svg" alt="" width="1210" height="207" />
+    <div class="fbox__bottom">
+      <p class="flegal">{legal.map((l, i) => <>{i > 0 && <span class="flegal__sep" aria-hidden="true"></span>}<a href={l.href}>{l.t}</a></>)}</p>
+      <p class="fcopy">© 2026 AssessPrep</p>
+    </div>
+  </div>
+
+  <!-- Mobile -->
+  <div class="mfoot only-mobile">
+    <a class="mfoot__brand" href={SITE + '/'}><img src="/images/logo-mark.svg" alt="AssessPrep Logo" width="30" height="30" /><span>AssessPrep</span></a>
+    <p class="mfoot__tag">Next Generation Assessment Platform</p>
+    <div class="fsocial mfoot__social">
+      {socials.map((s) => <a href={s.href} aria-label={s.label} target="_blank" rel="noopener"><img src={`/icons/${s.icon}.svg`} alt="" width="30" height="30" /></a>)}
+    </div>
+    <div class="mfoot__grid">
+      <ul>{mFeatures.map((l) => <li><a href={l.href}>{l.t}</a>{l.isNew && <span class="fnew fnew--dark">New</span>}</li>)}</ul>
+      <ul>{mSolutions.map((l) => <li><a href={l.href}>{l.t}</a></li>)}</ul>
+      <div><p class="mfoot__h">Resources</p><ul>{mResources.map((l) => <li><a href={l.href}>{l.t}</a></li>)}</ul></div>
+      <div><p class="mfoot__h">Company</p><ul>{mCompany.map((l) => <li><a href={l.href}>{l.t}</a></li>)}</ul></div>
+    </div>
+    <img class="mfoot__wordmark" src="/images/footer-wordmark.svg" alt="" width="1210" height="207" />
+    <div class="mfoot__legal">
+      <a href={legal[0].href}>{legal[0].t}</a>
+      <p>{legal.slice(1).map((l, i) => <>{i > 0 && <span class="flegal__sep" aria-hidden="true"></span>}<a href={l.href}>{l.t}</a></>)}</p>
+      <p class="mfoot__copy">© 2025 AssessPrep.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding: 0 20px 25px; }
+  .fbox { position: relative; overflow: hidden; max-width: 1170px; margin: 0 auto; border: 1px solid var(--c-border); border-radius: 25px; padding: 80px 45px 0; }
+  .fbox__top { display: flex; justify-content: space-between; }
+  .fbrand img { width: 45px; height: 47px; }
+  .fbrand__name { display: block; margin-top: 16px; font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 1.4; letter-spacing: -0.03em; color: var(--c-text-2); }
+  .fbrand__tag { margin-top: 12px; font-family: var(--font-display); font-size: 16px; line-height: 1.8; letter-spacing: .03em; color: var(--c-muted); }
+  .fsocial { display: flex; gap: 15px; margin-top: 15px; }
+  .fsocial img { width: 30px; height: 30px; }
+  .fcols { display: grid; grid-template-columns: 217px 183px 164px 96px; margin-right: 0; }
+  .fcol__h { font-family: var(--font-body); font-size: 16px; font-weight: 500; line-height: 1.8; letter-spacing: .03em; color: var(--c-text-2); }
+  .fcol ul { list-style: none; margin: 36px 0 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+  .fcol li { display: flex; align-items: center; gap: 10px; }
+  .fcol a { font-family: var(--font-inter); font-size: 14px; font-weight: 500; line-height: 1.2; color: var(--c-faint); transition: color .2s ease; white-space: nowrap; }
+  .fcol a:hover { color: var(--c-text); }
+  .fnew { display: inline-block; padding: 1px 4px; border: 1px solid #bde3ea; border-radius: 4px; font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 14.4px; letter-spacing: .04em; color: var(--c-teal-dark); }
+  .fbox__wordmark { display: block; width: 1210px; max-width: none; height: 207px; object-fit: cover; object-position: top center; margin: 72px 0 0 -65px; }
+  .fbox__bottom { display: flex; justify-content: space-between; align-items: center; padding: 30px 0 38px; }
+  .flegal { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-family: var(--font-manrope); font-size: 18px; line-height: 1.5; color: var(--c-text); }
+  .flegal a:hover { text-decoration: underline; }
+  .flegal__sep { display: inline-block; width: 1px; height: 20px; background: currentColor; opacity: .8; }
+  .fcopy { font-family: var(--font-manrope); font-size: 18px; line-height: 1.5; color: var(--c-text-2); }
+
+  @media (max-width: 1199.98px) and (min-width: 810px) {
+    .fbox__top { flex-direction: column; gap: 50px; }
+    .fcols { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .mfoot { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px 0 0; }
+  .mfoot__brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 600; font-size: 24px; letter-spacing: -0.03em; color: var(--c-text-2); }
+  .mfoot__brand img { width: 30px; height: 30px; }
+  .mfoot__tag { margin-top: 18px; font-family: var(--font-display); font-size: 16px; letter-spacing: .03em; color: var(--c-muted); }
+  .mfoot__social { margin-top: 26px; }
+  .mfoot__grid { width: 100%; margin-top: 50px; display: grid; grid-template-columns: 1fr 1fr; row-gap: 40px; text-align: left; }
+  .mfoot__grid ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 15px; }
+  .mfoot__grid li { display: flex; align-items: center; gap: 8px; }
+  .mfoot__grid a { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 14px; font-weight: 500; line-height: 21px; letter-spacing: .03em; color: var(--c-muted); }
+  .mfoot__grid a::before { content: ''; width: 6px; height: 6px; border-right: 1.5px solid var(--c-muted); border-top: 1.5px solid var(--c-muted); transform: rotate(45deg); margin-right: 2px; }
+  .fnew--dark { color: var(--c-text); font-weight: 600; border-color: var(--c-border); }
+  .mfoot__h { font-family: var(--font-body); font-size: 16px; font-weight: 500; line-height: 1.6; letter-spacing: .03em; color: var(--c-text-2); margin-bottom: 15px; }
+  .mfoot__wordmark { width: 100%; height: auto; margin-top: 50px; padding-bottom: 20px; border-bottom: 1px solid var(--c-border); }
+  .mfoot__legal { margin-top: 44px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--font-manrope); font-size: 18px; line-height: 1.5; color: #0099ff; }
+  .mfoot__legal p { display: flex; align-items: center; gap: 10px; }
+  .mfoot__copy { color: #797b85; }
+</style>

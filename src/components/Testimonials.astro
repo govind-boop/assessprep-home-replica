@@ -1,0 +1,109 @@
+---
+import { url } from '../data/site';
+const reviews = [
+  { name: 'Dr. Ana Villarreal', org: 'South Texas ISD World Scholars', img: '/images/t-ana-villarreal.png', yt: '83Xpc7qrFTk', quote: '"It is a time-saver for sure. We love how students can write by hand and then upload".', href: 'https://youtu.be/83Xpc7qrFTk?si=YRL3LYHnC7IgRnGl' },
+  { name: 'Shanon Johnson', org: 'Fairgreen International School, UAE', img: '/images/t-shanon-johnson.jpg', yt: 'AE4KJ2wJHv4', quote: '"Having the bank of e-assessments, streamlines workflow and saves time".', href: url('case-study/teachers-can-use-the-ai-feature-to-produce-the-feedback-in-the-school-format-and-that-has-really-cut-down-on-time') },
+  { name: 'Audrey Boettcher', org: 'AISG, China', img: '/images/t-audrey-boettcher.jpg', yt: '9dFOms4rZsY', quote: '"The game changer for me this year has been using the lockdown app".', href: url('case-study/china-school-ai-cheating-prevention') },
+  { name: 'Zunaira Siddiqui', org: 'GEMS World Academy, Dubai', img: '/images/t-zunaira-siddiqui.jpg', yt: 'gZRTuK8l3pU', quote: '"Ever since we\'ve been using Lockdown mode haven\'t faced any breach of exam practice".', href: url('case-study/gems-world-academy-online-exam-software') },
+  { name: 'Ratnadeep Acharya', org: 'Skill Stork International School', img: '/images/t-ratnadeep-acharya.jpg', yt: 'S6xPxM4HxEY', quote: '"AssessPrep\'s question banks and interactive assessments have been a game changer".', href: 'https://youtu.be/S6xPxM4HxEY' },
+  { name: 'Archana Singh', org: 'Good Shepherd International School (GSIS)', img: '/images/t-archana-singh.png', yt: 'hFCE6lbzTZg', quote: '"Our students actually wait for the assessments."', href: 'https://youtu.be/hFCE6lbzTZg' },
+];
+---
+<section class="reviews" id="testimonials">
+  <div class="reviews__head">
+    <p class="reviews__rated"><img src="/icons/bolt.svg" alt="" width="24" height="24" />Rated 4.9 of 5</p>
+    <h2 class="h-xl reviews__title">Trusted by educators worldwide</h2>
+    <p class="lead reviews__sub">Hear from passionate educators who are shaping the future of assessments</p>
+  </div>
+
+  <div class="reviews__viewport" data-reviews>
+    <div class="reviews__track">
+      {[0, 1].map((copy) => reviews.map((r) => (
+        <article class="review" aria-hidden={copy === 1 ? 'true' : undefined}>
+          <header class="review__head">
+            <img class="review__avatar" src={r.img} alt={copy === 0 ? `${r.name} - AssessPrep user` : ''} width="60" height="60" loading="lazy" />
+            <div class="review__who">
+              <p class="review__name">{r.name}</p>
+              <p class="review__org">{r.org}</p>
+            </div>
+            <div class="review__stars" aria-label="5 stars">
+              {[1, 2, 3, 4, 5].map(() => <img src="/icons/star.svg" alt="" width="19" height="24" />)}
+            </div>
+          </header>
+          <div class="review__video" style={`background-image:url('/images/yt-${r.yt}.webp')`}>
+            <button class="review__play" type="button" data-yt={r.yt} aria-label={`Play video testimonial from ${r.name}`} tabindex={copy === 1 ? -1 : undefined}>
+              <img src="/icons/yt-play.svg" alt="" width="68" height="48" />
+            </button>
+          </div>
+          <p class="review__quote">{r.quote}</p>
+          <a class="review__more" href={r.href} target="_blank" rel="noopener" tabindex={copy === 1 ? -1 : undefined}>
+            <img src="/icons/info.svg" alt="" width="24" height="24" /><span>Learn more</span>
+          </a>
+        </article>
+      )))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews { padding: 100px 0 60px; }
+  .reviews__head { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 15px; }
+  .reviews__rated { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 14px; font-weight: 600; line-height: 21px; letter-spacing: .03em; color: var(--c-text); }
+  .reviews__rated img { width: 24px; height: 24px; }
+  .reviews__title { margin-top: 15px; max-width: 800px; }
+  .reviews__sub { margin-top: 15px; max-width: 700px; }
+
+  .reviews__viewport {
+    width: 1200px; max-width: 100%; margin: 15px auto 0; padding: 85px 0 85px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  }
+  .reviews__track { display: flex; gap: 30px; width: max-content; animation: reviews 70s linear infinite; }
+  .reviews__viewport:hover .reviews__track, .reviews__viewport.is-paused .reviews__track { animation-play-state: paused; }
+  @keyframes reviews { from { transform: translateX(-200px); } to { transform: translateX(calc(-50% - 15px - 200px)); } }
+
+  .review {
+    position: relative; width: 401px; height: 515px; flex: none; padding: 30px; border-radius: 15px; background: #fff;
+    border: 1px solid #ececef; box-shadow: var(--card-shadow);
+  }
+  .review__head { position: relative; display: flex; gap: 15px; height: 60px; }
+  .review__avatar { width: 60px; height: 60px; border-radius: 100px; object-fit: cover; box-shadow: rgba(0,0,0,.15) 0 1px 5px; flex: none; }
+  .review__who { padding-top: 6px; min-width: 0; }
+  .review__name { font-family: var(--font-body); font-size: 16px; font-weight: 500; line-height: 1.8; letter-spacing: .03em; color: var(--c-text); white-space: nowrap; }
+  .review__org { font-family: var(--font-body); font-size: 14px; line-height: 1.8; letter-spacing: .02em; color: var(--c-muted); white-space: nowrap; }
+  .review__stars { position: absolute; left: 225px; top: 8px; display: flex; gap: 4px; }
+  .review__stars img { width: 19px; height: 24px; }
+  .review__video { position: relative; margin-top: 20px; height: 253px; border-radius: 16px; overflow: hidden; background: #000 center / cover no-repeat; }
+  .review__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .review__play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+  .review__play img { width: 68px; height: 48px; opacity: .85; transition: opacity .2s ease; }
+  .review__play:hover img { opacity: 1; }
+  .review__quote { margin-top: 20px; font-family: var(--font-body); font-size: 16px; line-height: 1.8; letter-spacing: .03em; color: var(--c-muted); }
+  .review__more { position: absolute; left: 30px; top: 461px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-inter); font-size: 16px; color: var(--c-text); }
+  .review__more img { width: 24px; height: 24px; }
+  .review__more:hover span { text-decoration: underline; }
+
+  @media (max-width: 809.98px) {
+    .reviews { padding: 18px 0 81px; }
+    .reviews__title { font-size: 28px; max-width: 300px; }
+    .reviews__sub { font-size: 16px; letter-spacing: .03em; max-width: 360px; }
+    .reviews__viewport { margin-top: 0; padding: 50px 0; }
+    .review__quote { font-size: 15px; }
+  }
+</style>
+
+<script>
+  // Click-to-load YouTube embeds (thumbnail facade, like the live cards).
+  document.querySelectorAll<HTMLButtonElement>('[data-yt]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.yt!;
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      frame.title = 'Video testimonial';
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.allowFullscreen = true;
+      btn.replaceWith(frame);
+      document.querySelector('[data-reviews]')?.classList.add('is-paused');
+    });
+  });
+</script>

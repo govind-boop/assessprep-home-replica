@@ -1,0 +1,143 @@
+---
+import { url } from '../data/site';
+type Visual = { kind: 'img' | 'lottie'; src: string; alt?: string; w: number; h: number; left: number; bottom: number };
+type Card = { title: string; body: string; href: string; height: number; visual: Visual; dotsTop: number };
+const left: Card[] = [
+  {
+    title: 'Create rich, interactive assessments',
+    body: 'Collaboratively create engaging and accessible online assessments with videos, simulations, images and 20+ question types.',
+    href: url('features/create-online-assessments'),
+    height: 702,
+    dotsTop: 287,
+    visual: { kind: 'img', src: '/images/feature-create.svg', alt: 'Create Assessments with AssessPrep: 20+ interactive question types', w: 505, h: 416, left: 32, bottom: 0 },
+  },
+  {
+    title: 'Secure testing environment',
+    body: 'Deliver high-stakes assessments in lockdown mode with advanced tools like math editor, graphing calculator, timer and multi-lingual support.',
+    href: url('features/deliver'),
+    height: 701,
+    dotsTop: 286,
+    visual: { kind: 'lottie', src: '/lottie/lottie-secure.json', w: 505, h: 411, left: 32, bottom: 0 },
+  },
+];
+const right: Card[] = [
+  {
+    title: 'High quality question bank',
+    body: 'Access thousands of customisable, pre-built formative, summative and exam-style questions for IB MYP & DP and IGCSE.',
+    href: url('features/grade-with-ai'),
+    height: 759,
+    dotsTop: 344,
+    visual: { kind: 'img', src: '/images/feature-question-bank.svg', alt: '60,000+ exam-style questions across curriculums', w: 505, h: 419, left: 32, bottom: 50 },
+  },
+  {
+    title: 'Powerful grading & analytics',
+    body: 'Streamline grading with automated marking, detailed annotations, and actionable analytics that provide real-time insights into student performance and learning gaps.',
+    href: url('features/ai'),
+    height: 644,
+    dotsTop: 229,
+    visual: { kind: 'lottie', src: '/lottie/lottie-grading.json', w: 415, h: 355, left: 77, bottom: 19 },
+  },
+];
+---
+<section class="features" id="features">
+  <div class="features__head">
+    <span class="badge">All-in-One Platform</span>
+    <h2 class="h-xl features__title">Everything you need in an <br class="only-desktop" />assessment platform</h2>
+  </div>
+
+  <div class="features__grid">
+    {[left, right].map((col) => (
+      <div class="features__col">
+        {col.map((c) => (
+          <article class="fcard" style={`--h:${c.height}px;--dots:${c.dotsTop}px;--vw:${c.visual.w};--vh:${c.visual.h};--vl:${c.visual.left}px;--vb:${c.visual.bottom}px`}>
+            <div class="fcard__dots" aria-hidden="true"></div>
+            <div class="fcard__shade" aria-hidden="true"></div>
+            <div class="fcard__copy">
+              <h3 class="fcard__title">{c.title}</h3>
+              <p class="fcard__body">{c.body}</p>
+              <a class="btn-dark fcard__btn" href={c.href}>Learn more <img src="/icons/chevron-right.svg" alt="" width="16" height="19" /></a>
+            </div>
+            <div class="fcard__visual">
+              {c.visual.kind === 'img'
+                ? <img src={c.visual.src} alt={c.visual.alt} width={c.visual.w} height={c.visual.h} loading="lazy" />
+                : <div class="fcard__lottie" data-lottie={c.visual.src} role="img" aria-label={c.title}></div>}
+            </div>
+          </article>
+        ))}
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .features { max-width: 1200px; margin: 0 auto; padding: 74px 15px 160px; }
+  .features__head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .features__title { max-width: 900px; margin-top: 15px; }
+  .features__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 81px; align-items: start; }
+  .features__col { display: flex; flex-direction: column; gap: 34px; }
+
+  .fcard {
+    position: relative; height: var(--h); overflow: hidden; border-radius: 15px; background: #fff;
+    border: 1px solid #ececef; box-shadow: var(--card-shadow);
+  }
+  .fcard__dots {
+    position: absolute; left: -36px; right: -36px; top: var(--dots); height: 429px;
+    background: url('/images/dot-pattern.svg') center / 41px auto repeat; opacity: .07;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 35%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 35%);
+  }
+  .fcard__shade { position: absolute; left: -15px; right: -15px; bottom: 0; height: 400px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,.02) 100%); }
+  .fcard__copy { position: relative; padding: 50px 50px 0; max-width: 569px; }
+  .fcard__title { font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 1.4; letter-spacing: -0.03em; color: var(--c-text); }
+  .fcard__body { margin-top: 9px; max-width: 465px; font-family: var(--font-body); font-size: 16px; line-height: 1.8; letter-spacing: 0.03em; color: var(--c-muted); }
+  .fcard__btn { margin-top: 20px; }
+  .fcard__visual { position: absolute; left: var(--vl); bottom: var(--vb); width: calc(var(--vw) * 1px); height: calc(var(--vh) * 1px); }
+  .fcard__visual img { width: 100%; height: 100%; object-fit: cover; }
+  .fcard__lottie { width: 100%; height: 100%; }
+
+  @media (max-width: 1199.98px) and (min-width: 810px) {
+    .fcard__visual { left: 50%; transform: translateX(-50%) scale(.85); transform-origin: bottom center; }
+  }
+
+  @media (max-width: 809.98px) {
+    .features { padding: 64px 15px 50px; }
+    .features__title { max-width: 360px; font-size: 28px; letter-spacing: -0.04em; margin-top: 7px; }
+    .features__grid { grid-template-columns: 1fr; margin-top: 30px; gap: 34px; }
+    .fcard { height: auto; display: flex; flex-direction: column; text-align: center; }
+    .fcard__copy { padding: 42px 15px 0; display: flex; flex-direction: column; align-items: center; }
+    .fcard__title { font-size: 18px; letter-spacing: -0.01em; }
+    .fcard__body { margin-top: 18px; font-size: 15px; letter-spacing: 0.03em; }
+    .fcard__btn { margin-top: 18px; }
+    .fcard__dots { top: auto; bottom: 0; height: 60%; }
+    .fcard__visual {
+      position: relative; left: auto; bottom: auto; margin: 95px auto 50px;
+      width: 100%; height: auto; aspect-ratio: var(--vw) / var(--vh);
+    }
+  }
+</style>
+
+<script>
+  // Lottie animations for the "Secure testing" and "Grading" cards.
+  // Uses the *light* lottie build (SVG renderer, no expression support => no eval of animation data).
+  import lottie from 'lottie-web/build/player/lottie_light';
+
+  const els = document.querySelectorAll<HTMLElement>('[data-lottie]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      const el = e.target as HTMLElement & { _anim?: ReturnType<typeof lottie.loadAnimation> };
+      if (e.isIntersecting) {
+        if (!el._anim) {
+          el._anim = lottie.loadAnimation({
+            container: el,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: el.dataset.lottie!,
+            rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+          });
+        } else el._anim.play();
+      } else el._anim?.pause();
+    });
+  }, { rootMargin: '200px' });
+  els.forEach((el) => io.observe(el));
+</script>

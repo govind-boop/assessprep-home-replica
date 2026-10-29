@@ -1,0 +1,44 @@
+---
+const items = [
+  { n: '4 hours', d: 'saved, so teachers can focus on high-impact feedback' },
+  { n: '3× faster', d: 'exam-to-insight delivery, so learners can apply changes immediately' },
+  { n: '89%', d: 'of teachers report quicker identification of learning gaps after adopting AssessPrep.' },
+];
+---
+<section class="impact">
+  <div class="impact__head">
+    <span class="badge">Impact at a Glance</span>
+    <h2 class="h-xl impact__title">See the difference in every assessment cycle</h2>
+    <p class="lead impact__sub">Turn assessments from a logistical burden into a tool for growth</p>
+  </div>
+  <div class="impact__grid">
+    {items.map((it) => (
+      <div class="impact__item">
+        <p class="impact__n">{it.n}</p>
+        <p class="impact__d">{it.d}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .impact { max-width: 1200px; margin: 0 auto; padding: 0 15px 370px; }
+  .impact__head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .impact__title { max-width: 900px; margin-top: 15px; }
+  .impact__sub { margin-top: 15px; }
+  .impact__grid { display: grid; grid-template-columns: repeat(3, 337px); justify-content: space-between; margin-top: 80px; }
+  .impact__n { font-family: var(--font-heading); font-weight: 600; font-size: 48px; line-height: 1.4; letter-spacing: -0.04em; color: var(--c-text); }
+  .impact__d { margin-top: 20px; font-family: var(--font-body); font-size: 18px; line-height: 1.6; letter-spacing: 0.02em; color: var(--c-muted); }
+
+  @media (max-width: 1199.98px) and (min-width: 810px) {
+    .impact__grid { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  }
+  @media (max-width: 809.98px) {
+    .impact { padding: 0 30px 362px; }
+    .impact__title { font-size: 28px; max-width: 330px; }
+    .impact__sub { max-width: 279px; margin-top: 34px; font-size: 16px; letter-spacing: .03em; }
+    .impact__grid { grid-template-columns: 1fr; text-align: center; margin-top: 70px; gap: 40px; }
+    .impact__n { font-size: 28px; }
+    .impact__d { margin-top: 20px; font-size: 16px; letter-spacing: .03em; }
+  }
+</style>

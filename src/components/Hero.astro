@@ -1,0 +1,93 @@
+---
+import { BOOK_DEMO } from '../data/site';
+const logos = [
+  { src: '/images/school-tns-beaconhouse.webp', alt: 'TNS Beaconhouse School logo', w: 86, h: 60 },
+  { src: '/images/school-isu.webp', alt: 'International School of Uganda logo', w: 197, h: 71 },
+  { src: '/images/school-dwight-seoul.webp', alt: 'Dwight School, Seoul, Logo', w: 53, h: 56 },
+  { src: '/images/school-emirates-intl.webp', alt: 'Emirates International School logo', w: 251, h: 69 },
+  { src: '/images/school-aga-khan.webp', alt: 'Aga Khan Academy logo', w: 77, h: 78 },
+  { src: '/images/school-oakridge.webp', alt: 'Oakridge International School logo', w: 281, h: 68 },
+];
+---
+<section class="hero" id="hero">
+  <div class="hero__rings" aria-hidden="true">
+    <span style="--r:390px"></span>
+    <span style="--r:520px"></span>
+    <span style="--r:650px"></span>
+  </div>
+
+  <div class="hero__content">
+    <h1 class="hero__title">Next Generation Assessment Platform For Every School</h1>
+    <p class="hero__sub">Empower educators, engage students, and improve learning outcomes</p>
+    <a class="btn-teal btn-teal--lg hero__btn" href={BOOK_DEMO}>Book a Demo</a>
+    <p class="hero__trusted">Trusted by 800+ Schools Worldwide</p>
+  </div>
+
+  <div class="hero__logos" aria-label="Partner schools">
+    <div class="marquee">
+      {[0, 1, 2].map((i) => (
+        <ul class="marquee__set" aria-hidden={i > 0 ? 'true' : undefined}>
+          {logos.map((l) => (
+            <li><img src={l.src} alt={i === 0 ? l.alt : ''} width={l.w} height={l.h} style={`--w:${l.w}px;--h:${l.h}px`} loading="eager" /></li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 777px;
+    padding-top: 220px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero__rings {
+    position: absolute; inset: 0; pointer-events: none;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+  }
+  .hero__rings span {
+    position: absolute; left: 50%; top: 420px;
+    width: calc(var(--r) * 2); height: calc(var(--r) * 2);
+    margin-left: calc(var(--r) * -1); margin-top: calc(var(--r) * -1);
+    border: 1px solid #e8e8ea; border-radius: 50%;
+  }
+  .hero__content { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 20px; }
+  .hero__title {
+    max-width: 700px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 48px; line-height: 1.4; letter-spacing: -0.04em; color: var(--c-text);
+  }
+  .hero__sub { margin-top: 15px; font-family: var(--font-body); font-size: 18px; line-height: 1.6; letter-spacing: 0.02em; color: var(--c-muted); }
+  .hero__btn { margin-top: 35px; }
+  .hero__trusted { margin-top: 30px; font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 1.2; letter-spacing: 0.04em; color: var(--c-muted); }
+
+  .hero__logos {
+    position: relative; width: 924px; max-width: calc(100% - 40px); height: 100px; margin: 60px auto 0; overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  }
+  .marquee { display: flex; width: max-content; height: 100%; animation: logos 38s linear infinite; }
+  .marquee__set { display: flex; align-items: center; gap: 68px; margin: 0; padding: 0 80px 0 0; list-style: none; }
+  .marquee__set img { width: var(--w); height: var(--h); object-fit: contain; }
+  @keyframes logos { to { transform: translateX(calc(-100% / 3)); } }
+
+  @media (max-width: 1199.98px) {
+    .hero__title { font-size: 44px; }
+  }
+  @media (max-width: 809.98px) {
+    .hero { height: auto; padding: 235px 0 144px; }
+    .hero__rings span { top: 290px; }
+    .hero__rings span:nth-child(1) { --r: 205px !important; }
+    .hero__rings span:nth-child(n+2) { display: none; }
+    .hero__title { max-width: 300px; font-size: 29px; line-height: 1.4; }
+    .hero__sub { max-width: 279px; margin-top: 18px; font-size: 16px; letter-spacing: 0.03em; }
+    .hero__btn { margin-top: 20px; }
+    .hero__trusted { margin-top: 14px; }
+    .hero__logos { width: 100%; max-width: none; margin-top: 50px; height: 100px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 25%, #000 75%, transparent 100%);
+              mask-image: linear-gradient(90deg, transparent 0%, #000 25%, #000 75%, transparent 100%); }
+  }
+</style>

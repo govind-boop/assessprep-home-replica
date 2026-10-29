@@ -1,0 +1,116 @@
+---
+const stats = [
+  { icon: 'stat-1', n: '800+', label: 'partner schools', m: 'Partner schools', ring: '#6bc8d8' },
+  { icon: 'stat-2', n: '85+', label: 'countries', m: 'Countries', ring: '#6bc8d8' },
+  { icon: 'stat-3', n: '5M+', label: 'student submissions', m: 'Students insights generated', ring: '#79cddc' },
+  { icon: 'stat-4', n: '1M+ hours', label: 'teacher-time reclaimed', m: 'Teacher time reclaimed', ring: '#70c9d9' },
+];
+const words = ['boring assessments', 'cheating concerns', 'manual grading', 'limited insights', 'slow feedback loops', 'assessment anxiety'];
+---
+<section class="stats">
+  <div class="stats__row">
+    <div class="stats__band" aria-hidden="true"></div>
+    <img class="stats__line" src="/images/stats-line.svg" alt="" width="1120" height="10" />
+    {stats.map((s) => (
+      <div class="stat">
+        <div class="stat__icon">
+          <img class="stat__pattern" src="/images/stat-pattern.png" alt="" width="66" height="66" />
+          <span class="stat__ring" style={`background:${s.ring}`}></span>
+          <span class="stat__core"><img src={`/icons/${s.icon}.svg`} alt="" width="30" height="30" /></span>
+        </div>
+        <p class="stat__n">{s.n}</p>
+        <p class="stat__label"><span class="only-desktop">{s.label}</span><span class="only-mobile">{s.m}</span></p>
+      </div>
+    ))}
+  </div>
+
+  <div class="wave">
+    <img class="wave__spark" src="/images/wave-spark.svg" alt="" width="24" height="26" />
+    <img class="wave__arrow" src="/images/wave-arrow.svg" alt="" width="140" height="137" />
+    <h2 class="wave__title">Wave goodbye to</h2>
+    <div class="wave__window" data-wave>
+      <ul class="wave__list">
+        {[...words, ...words, ...words].map((w, i) => <li aria-hidden={i < words.length || i >= words.length * 2 ? 'true' : undefined}>{w}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats { position: relative; max-width: 1200px; margin: 0 auto; background: #fff; height: 574px; }
+  .stats__row {
+    position: relative; width: 1120px; max-width: calc(100% - 40px); margin: 0 auto; padding: 0 100px;
+    display: flex; justify-content: space-between; height: 171px;
+  }
+  .stats__band { position: absolute; left: 0; right: 0; top: -15px; height: 47px; background: linear-gradient(180deg, rgba(250,250,250,0) 0%, #fafafa 100%); }
+  .stats__line { position: absolute; left: 0; top: 29px; width: 100%; height: 10px; }
+  .stat { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .stat__icon { position: relative; width: 66px; height: 66px; }
+  .stat__pattern { position: absolute; inset: 0; width: 66px; height: 66px; }
+  .stat__ring, .stat__core { position: absolute; border-radius: 100px; }
+  .stat__ring { inset: 6px; box-shadow: rgba(0,0,0,.12) 0 6px 12px, rgba(0,0,0,.12) 0 2px 5px, rgba(0,0,0,.05) 0 6px 11px; }
+  .stat__core { inset: 8px; background: linear-gradient(180deg, #4c4c4c 0%, #111 100%); display: grid; place-items: center; }
+  .stat__core img { width: 30px; height: 30px; }
+  .stat__n { margin-top: 30px; font-family: var(--font-display); font-weight: 600; font-size: 32px; line-height: 1.4; color: #111; white-space: nowrap; }
+  .stat__label { margin-top: 6px; font-family: var(--font-display); font-weight: 500; font-size: 16px; line-height: 1.5; color: #4c4c4c; white-space: nowrap; }
+
+  .wave { position: relative; width: 1000px; max-width: calc(100% - 40px); margin: 50px auto 0; margin-left: max(20px, calc(50% - 440px)); height: 353px; }
+  .wave__spark { position: absolute; left: -20px; top: 142px; width: 24px; height: 26px; }
+  .wave__arrow { position: absolute; left: 270px; top: 41px; width: 140px; height: 137px; object-fit: contain; }
+  .wave__title, .wave__list li {
+    font-family: var(--font-switzer); font-weight: 600; font-size: 52px; line-height: 1.2; white-space: nowrap;
+  }
+  .wave__title { position: absolute; left: 0; top: 145px; color: #111; }
+  .wave__window { position: absolute; left: 426px; top: 151px; width: 574px; height: 63px; overflow: hidden; }
+  .wave__list { list-style: none; margin: 0; padding: 0; color: var(--c-teal); }
+  .wave__list li { height: 72.3px; }
+
+  @media (max-width: 1199.98px) and (min-width: 810px) {
+    .stats__row { padding: 0 40px; }
+    .wave { transform: scale(.8); transform-origin: left top; margin-left: 60px; }
+  }
+
+  @media (max-width: 809.98px) {
+    .stats { height: auto; padding: 0 16px 40px; }
+    .stats__row { width: 100%; max-width: none; padding: 0; height: auto; display: grid; grid-template-columns: 164px 164px; justify-content: center; column-gap: 30px; row-gap: 53px; }
+    .stats__band, .stats__line { display: none; }
+    .stat__n { margin-top: 30px; }
+    .stat__label { white-space: normal; max-width: 164px; }
+    .wave { width: auto; max-width: none; margin: 107px 0 0 10px; height: 330px; }
+    .wave__spark { left: -8px; top: -14px; width: 20px; height: 22px; transform: rotate(-10deg); }
+    .wave__arrow { left: 222px; top: 6px; width: 40px; height: 40px; transform: rotate(35deg) scaleY(-1); }
+    .wave__title { position: static; font-family: var(--font-heading); font-size: 28px; line-height: 1.4; letter-spacing: -0.04em; color: var(--c-text); }
+    .wave__window {
+      position: relative; left: 0; top: 0; width: 100%; height: 248px; margin-top: 4px;
+      -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.06) 0%, rgba(0,0,0,.2) 36%, #000 42%, #000 58%, rgba(0,0,0,.2) 64%, rgba(0,0,0,.06) 100%);
+              mask-image: linear-gradient(180deg, rgba(0,0,0,.06) 0%, rgba(0,0,0,.2) 36%, #000 42%, #000 58%, rgba(0,0,0,.2) 64%, rgba(0,0,0,.06) 100%);
+    }
+    .wave__list li { font-size: 33px; height: 49.6px; }
+  }
+</style>
+
+<script>
+  // Step the "Wave goodbye to ___" word list upwards, one word every 2s (Framer ticker approximation).
+  document.querySelectorAll<HTMLElement>('[data-wave]').forEach((win) => {
+    const list = win.querySelector<HTMLElement>('.wave__list')!;
+    const items = list.querySelectorAll('li');
+    const n = items.length / 3; // the word list is rendered three times for a seamless loop
+    const mobile = window.matchMedia('(max-width: 809.98px)');
+    let i = n + (mobile.matches ? 1 : 2); // desktop starts on "manual grading" like the live page
+    const apply = (animate: boolean) => {
+      const step = (items[0] as HTMLElement).offsetHeight;
+      // On mobile the active word sits in the middle row of a 5-row window
+      const offset = mobile.matches ? i * step - 2 * step : i * step;
+      list.style.transition = animate ? 'transform .7s cubic-bezier(.65,0,.35,1)' : 'none';
+      list.style.transform = `translateY(${-offset}px)`;
+    };
+    apply(false);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setInterval(() => {
+      i++;
+      apply(true);
+      if (i >= 2 * n) setTimeout(() => { i -= n; apply(false); }, 750);
+    }, 2200);
+    mobile.addEventListener('change', () => apply(false));
+  });
+</script>
