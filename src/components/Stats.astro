@@ -63,11 +63,11 @@ const words = ['boring assessments', 'cheating concerns', 'manual grading', 'lim
   .wave__title { position: absolute; left: 0; top: 145px; color: #111; }
   .wave__window { position: absolute; left: 426px; top: 151px; width: 574px; height: 63px; overflow: hidden; }
   .wave__list { list-style: none; margin: 0; padding: 0; color: var(--c-teal); }
-  .wave__list li { height: 72.3px; }
+  .wave__list li { height: 72px; }
 
   @media (max-width: 1199.98px) and (min-width: 810px) {
     .stats__row { padding: 0 40px; }
-    .wave { transform: scale(.8); transform-origin: left top; margin-left: 60px; }
+    .wave { transform: scale(.7); transform-origin: left top; margin-left: max(20px, calc(50% - 350px)); height: 260px; }
   }
 
   @media (max-width: 809.98px) {

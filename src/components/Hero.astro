@@ -74,8 +74,10 @@ const logos = [
   .marquee__set img { width: var(--w); height: var(--h); object-fit: contain; }
   @keyframes logos { to { transform: translateX(calc(-100% / 3)); } }
 
-  @media (max-width: 1199.98px) {
-    .hero__title { font-size: 44px; }
+  @media (max-width: 1199.98px) and (min-width: 810px) {
+    .hero { padding-top: 205px; }
+    .hero__title { max-width: 620px; font-size: 30px; }
+    .hero__sub { font-size: 16px; }
   }
   @media (max-width: 809.98px) {
     .hero { height: auto; padding: 235px 0 144px; }

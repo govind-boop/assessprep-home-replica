@@ -3,7 +3,7 @@ import { MENUS, PLANS, BOOK_DEMO, SIGN_IN, SITE } from '../data/site';
 ---
 <header class="nav" data-nav>
   <!-- Desktop / tablet floating bar -->
-  <nav class="nav__bar only-desktop" aria-label="Main">
+  <nav class="nav__bar" aria-label="Main">
     <a class="nav__brand" href={SITE + '/'} aria-label="AssessPrep home">
       <img src="/images/logo-mark-nav.svg" alt="AssessPrep logo" width="30" height="30" />
       <span class="nav__wordmark">AssessPrep</span>
@@ -47,7 +47,7 @@ import { MENUS, PLANS, BOOK_DEMO, SIGN_IN, SITE } from '../data/site';
   </nav>
 
   <!-- Mobile bar -->
-  <nav class="mnav only-mobile" aria-label="Main mobile">
+  <nav class="mnav" aria-label="Main mobile">
     <div class="mnav__top">
       <a class="nav__brand" href={SITE + '/'} aria-label="AssessPrep home">
         <img src="/images/logo-mark-nav.svg" alt="AssessPrep logo" width="30" height="30" />
@@ -152,6 +152,9 @@ import { MENUS, PLANS, BOOK_DEMO, SIGN_IN, SITE } from '../data/site';
   .dd__text { display: flex; flex-direction: column; gap: 2px; }
   .dd__title { font-family: var(--font-inter); font-size: 14px; font-weight: 500; color: #000; }
   .dd__sub { font-family: var(--font-inter); font-size: 12px; color: #525252; }
+
+  @media (max-width: 1199.98px) { .nav__bar { display: none; } }
+  @media (min-width: 1200px) { .mnav { display: none; } }
 
   /* Mobile */
   .mnav { background: #fff; border-bottom: 1px solid var(--c-border); }
